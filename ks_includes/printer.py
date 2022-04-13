@@ -60,15 +60,15 @@ class Printer:
                     "temperature": 0,
                     "target": 0
                 }
-            # if x.startswith('bed_mesh '):
-            #     r = self.config[x]
-            #     r['x_count'] = int(r['x_count'])
-            #     r['y_count'] = int(r['y_count'])
-            #     r['max_x'] = float(r['max_x'])
-            #     r['min_x'] = float(r['min_x'])
-            #     r['max_y'] = float(r['max_y'])
-            #     r['min_y'] = float(r['min_y'])
-            #     r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
+            if x.startswith('bed_mesh '):
+                r = self.config[x]
+                r['x_count'] = int(r['x_count'])
+                r['y_count'] = int(r['y_count'])
+                r['max_x'] = float(r['max_x'])
+                r['min_x'] = float(r['min_x'])
+                r['max_y'] = float(r['max_y'])
+                r['min_y'] = float(r['min_y'])
+                r['points'] = [[float(j.strip()) for j in i.split(",")] for i in r['points'].strip().split("\n")]
         self.process_update(data)
 
         logging.info("Klipper version: %s", self.klipper['version'])
