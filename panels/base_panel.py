@@ -139,7 +139,7 @@ class BasePanel(ScreenPanel):
 
         if self._printer.has_heated_bed():
             heater_bed = self._gtk.Image("heat-up.svg", None, .4, .4)
-            self.labels['control_grid'] = Gtk.Label(label="control_grid")
+            self.labels['control_grid'] = Gtk.Label("control_grid")
             # self.labels['heat_up'].get_style_context().add_class("printing-info")
             heater_bed_box = Gtk.Box(spacing=0)
             heater_bed_box.pack_start(heater_bed, True, 5, 5)
