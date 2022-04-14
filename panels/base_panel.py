@@ -137,15 +137,15 @@ class BasePanel(ScreenPanel):
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         self.control['temp_box'].pack_start(self.labels["%s_box" %  self.current_extruder], True, 5, 5)
 
-        if self._printer.has_heat_up():
+        if self._printer.has_heated_bed():
             heater_bed = self._gtk.Image("heat-up.svg", None, .4, .4)
-            self.labels['heat-up'] = Gtk.Label(label="20 C")
+            self.labels['heat-up'] = Gtk.Label(label="25 C")
             # self.labels['heat_up'].get_style_context().add_class("printing-info")
             heater_bed_box = Gtk.Box(spacing=0)
             heater_bed_box.pack_start(heater_bed, True, 5, 5)
             heater_bed_box.pack_start(self.labels['heat-up'], True, 3, 3)
             self.control['temp_box'].pack_end(heater_bed_box, True, 3, 3)
-        if self._printer.has_heated_bed():
+        
             heater_bed = self._gtk.Image("bed.svg", None, .4, .4)
             self.labels['heater_bed'] = Gtk.Label(label="20 C")
             # self.labels['heater_bed'].get_style_context().add_class("printing-info")
@@ -191,9 +191,9 @@ class BasePanel(ScreenPanel):
         if action != "notify_status_update" or self._printer is None:
             return
 
-        if self._printer.has_heat_up():
-            self.labels["heat-up"].set_label(
-                "%02d°" % round(self._printer.get_dev_stat("heat-up", "temperature")))
+        # if self._printer.has_heat_up():
+        #     self.labels["heat-up"].set_label(
+        #         "%02d°" % round(self._printer.get_dev_stat("heat-up", "temperature")))
 
         if self._printer.has_heated_bed():
             self.labels["heater_bed"].set_label(
