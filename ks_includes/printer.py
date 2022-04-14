@@ -59,12 +59,7 @@ class Printer:
                 self.devices[x] = {
                     "temperature": 0,
                     "target": 0
-                }
-            if x == 'heat-up' or x.startswith('heater_generic ') or x.startswith('temperature_sensor '):
-                self.devices[x] = {
-                    "temperature": 0,
-                    "target": 0
-                }    
+                }   
             if x.startswith('bed_mesh '):
                 r = self.config[x]
                 r['x_count'] = int(r['x_count'])
