@@ -131,11 +131,11 @@ class BasePanel(ScreenPanel):
             # self.labels[extruder].get_style_context().add_class("printing-info")
             if i <= 4:
                 ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .4, .4)
-                self.labels[extruder + '_box'].pack_start(ext_img, True, 3, 3)
-            self.labels[extruder + '_box'].pack_start(self.labels[extruder], True, 3, 3)
+                self.labels[extruder + '_box' + '_box'].pack_start(ext_img, True, 3, 3)
+            self.labels[extruder + '_box' + '_box'].pack_start(self.labels[extruder], True, 3, 3)
             i += 1
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, 5, 5)
+        self.control['temp_box'].pack_start(self.labels["%s_box" % "%s_box" % self.current_extruder], True, 5, 5)
 
         if self._printer.has_heated_bed():
             heater_bed = self._gtk.Image("bed.svg", None, .4, .4)
@@ -148,7 +148,7 @@ class BasePanel(ScreenPanel):
 
             heat_up = self._gtk.Image("heat-up.svg", None , .4,.4)
             self.labels['heat-up'] = Gtk.Label(label="20 C")
-             # self.labels['heat_up'].get_style_context().add_class("printing-info")
+            # self.labels['heat_up'].get_style_context().add_class("printing-info")
             heater_bed_box = Gtk.Box(spacing=0)
             heater_bed_box.pack_start(heat_up, True, 5, 5)
             heater_bed_box.pack_start(self.labels['heat-up'], True, 3, 3)
