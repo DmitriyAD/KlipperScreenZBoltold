@@ -35,7 +35,7 @@ class MainPanel(MenuPanel):
 
         add_heaters = self._printer.get_heaters()
         for h in add_heaters:
-            if h == "heater_bed" or h =="heat-up":
+            if h == "heater_bed":
                 self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
             else:
                 name = " ".join(h.split(" ")[1:])
@@ -61,7 +61,6 @@ class MainPanel(MenuPanel):
         self.grid = grid
 
         self.target_temps = {
-            "heat-up": 0,
             "heater_bed": 0,
             "extruder": 0
         }
@@ -87,6 +86,6 @@ class MainPanel(MenuPanel):
                 h,
                 self._printer.get_dev_stat(h, "temperature"),
                 self._printer.get_dev_stat(h, "target"),
-                None if h == "heater_bed" or h == "heat-up" else " ".join(h.split(" ")[1:])
+                None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )   
         return
