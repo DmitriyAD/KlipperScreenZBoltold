@@ -153,7 +153,7 @@ class BasePanel(ScreenPanel):
             heat_up = Gtk.Box(spacing=0)
             heat_up.pack_start(heat_up, True, 7, 7)
             heat_up.pack_start(self.labels['heat-up'], True, 3, 3)
-            self.control['temp_box'].pack_end(heat_up, True, 7, 7)
+            self.control['temp_box'].pack_end(heat_up, True, 9, 9)
         
 
        
