@@ -206,16 +206,6 @@ class Printer:
             heaters.append(h)
         return heaters
 
-    def get_heat_up(self):
-        heaters_up = []
-        if self.has_heat_up():
-           heaters_up.append("heat-up")
-        for l in self.get_config_section_list("heater_generic "):
-            heaters_up.append(l)
-        for l in self.get_config_section_list("temperature_sensor "):
-            heaters_up.append(l)
-        return heaters_up
-
     def get_printer_status_data(self):
         data = {
             "printer": {
@@ -291,10 +281,7 @@ class Printer:
     def has_heated_bed(self):
         if "heater_bed" in self.devices:
             return True
-
-    def  get_heat_up(self):
-        if "heat-up" in self.devices:
-            return True        
+       
 
     def section_exists(self, section):
         if section in self.get_config_section_list():
