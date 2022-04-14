@@ -276,9 +276,7 @@ class Printer:
 
     def has_heated_bed(self):
         if "heater_bed" in self.devices:
-            return True   
-        if "heat-up" in self.devices:
-            return True        
+            return True         
        
 
     def section_exists(self, section):
