@@ -61,7 +61,6 @@ class MainPanel(MenuPanel):
         self.grid = grid
 
         self.target_temps = {
-            "heat-up": 0,
             "heater_bed": 0,
             "extruder": 0
         }
