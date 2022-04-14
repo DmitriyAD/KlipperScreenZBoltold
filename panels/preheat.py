@@ -111,6 +111,9 @@ class PreheatPanel(ScreenPanel):
                 elif heater.startswith('heater_bed'):
                     self._screen._ws.klippy.set_bed_temp(0)
                     self._printer.set_dev_stat(heater, "target", 0)
+                elif heater.startswith('heat-up'):
+                    self._screen._ws.klippy.set_bed_temp(0)
+                    self._printer.set_dev_stat(heater, "target", 0)    
                 else:
                     self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), 0)
                     self._printer.set_dev_stat(heater, "target", 0)
@@ -125,6 +128,10 @@ class PreheatPanel(ScreenPanel):
                 logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['bed']))
                 self._screen._ws.klippy.set_bed_temp(self.preheat_options[setting]["bed"])
                 self._printer.set_dev_stat(heater, "target", int(self.preheat_options[setting]["bed"]))
+            elif heater.startswith('heat-up'):
+                logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['heat-up']))
+                self._screen._ws.klippy.set_bed_temp(self.preheat_options[setting]["heat-up"])
+                self._printer.set_dev_stat(heater, "target", int(self.preheat_options[setting]["heat-up"]))    
             else:
                 logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['extruder']))
                 self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater),
@@ -149,5 +156,5 @@ class PreheatPanel(ScreenPanel):
                 h,
                 self._printer.get_dev_stat(h, "temperature"),
                 self._printer.get_dev_stat(h, "target"),
-                None if h == "heater_bed" else " ".join(h.split(" ")[1:])
+                None if h == "heater_bed" or h=="heat-up" else " ".join(h.split(" ")[1:])
             )
