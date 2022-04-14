@@ -190,17 +190,14 @@ class BasePanel(ScreenPanel):
     def process_update(self, action, data):
         if action != "notify_status_update" or self._printer is None:
             return
-
-        
-
         if self._printer.has_heated_bed():
             self.labels["heater_bed"].set_label(
                 "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
         for x in self._printer.get_tools():
             self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature"))) 
-        if self._printer.has_heated_bed():
-            self.labels["heat-up"].set_label(
-                "%02d°" % round(self._printer.get_dev_stat(x, "temperature")))     
+            self.labels[x] = self._gtk.ButtonImage("heat-up")
+            # self.labels["heat-up"].set_label(
+            #     "%02d°" % round(self._printer.get_dev_stat(x, "temperature")))     
                    
     
         if "toolhead" in data and "extruder" in data["toolhead"]:
