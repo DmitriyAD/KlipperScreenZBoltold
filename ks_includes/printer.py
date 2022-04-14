@@ -76,6 +76,7 @@ class Printer:
 
     def process_update(self, data):
         keys = [
+            'bed_mesh',
             'display_status',
             'fan',
             'gcode_move',
@@ -217,8 +218,8 @@ class Printer:
             }
         }
 
-        # sections = ["bed_mesh", "bltouch", "probe", "quad_gantry_level", "z_tilt"]
-        sections = [ "bltouch", "probe", "quad_gantry_level", "z_tilt"]
+        sections = ["bed_mesh", "bltouch", "probe", "quad_gantry_level", "z_tilt"]
+        # sections = [ "bltouch", "probe", "quad_gantry_level", "z_tilt"]
         for section in sections:
             if self.config_section_exists(section):
                 data["printer"][section] = self.get_config_section(section).copy()
