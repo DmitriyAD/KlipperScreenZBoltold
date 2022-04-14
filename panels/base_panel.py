@@ -140,7 +140,7 @@ class BasePanel(ScreenPanel):
         if self._printer.has_heated_bed():
             heater_bed = self._gtk.Image("heat-up.svg", None, .4, .4)
             self.labels['heat-up'] = Gtk.Label(label="20 C")
-            self.labels['heat_up'].get_style_context().add_class("printing-info")
+            # self.labels['heat_up'].get_style_context().add_class("printing-info")
             heater_bed_box = Gtk.Box(spacing=0)
             heater_bed_box.pack_start(heater_bed, True, 5, 5)
             heater_bed_box.pack_start(self.labels['heat-up'], True, 3, 3)
@@ -148,7 +148,7 @@ class BasePanel(ScreenPanel):
 
             heater_bed = self._gtk.Image("bed.svg", None, .4, .4)
             self.labels['heater_bed'] = Gtk.Label(label="20 C")
-            # self.labels['heater_bed'].get_style_context().add_class("printing-info")
+            self.labels['heater_bed'].get_style_context().add_class("printing-info")
             heater_bed_box = Gtk.Box(spacing=0)
             heater_bed_box.pack_start(heater_bed, True, 5, 5)
             heater_bed_box.pack_start(self.labels['heater_bed'], True, 3, 3)
