@@ -54,12 +54,7 @@ class Printer:
                 self.toolcount += 1
                 if "shared_heater" in self.config[x]:
                     continue
-                self.extrudercount += 1
-            # if x == 'heat_up' or x.startswith('heater_generic ') or x.startswith('temperature_sensor '):
-            #     self.devices[x] = {
-            #         "temperature": 0,
-            #         "target": 0
-            #     }   
+                self.extrudercount += 1  
             if x == 'heater_bed' or x.startswith('heater_generic ') or x.startswith('temperature_sensor '):
                 self.devices[x] = {
                     "temperature": 0,
