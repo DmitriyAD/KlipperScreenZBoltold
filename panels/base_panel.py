@@ -195,9 +195,8 @@ class BasePanel(ScreenPanel):
                 "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
         for x in self._printer.get_tools():
             self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature"))) 
-            # self.labels[x] = self._gtk.ButtonImage("heat-up")
             self.labels["heat-up"].set_label[x](
-                "%02d°" % round(self._printer.get_dev_stat(x, "temperature")))     
+                "%02d°" % round(self._printer.get_dev_stat("heat-up", "temperature")))     
                    
     
         if "toolhead" in data and "extruder" in data["toolhead"]:
