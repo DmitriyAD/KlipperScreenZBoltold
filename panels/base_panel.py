@@ -196,15 +196,7 @@ class BasePanel(ScreenPanel):
             self.labels["heater_bed"].set_label(
                 "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
         for x in self._printer.get_tools():
-            self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature"))) 
-
-        if self._printer.has_heated_bed():       
-            add_heaters = self._printer.get_heaters()
-        for h in add_heaters:
-            if h == "heat-up":
-                name = " ".join(h.split(" ")[1:])
-                self.labels[h] = self._gtk.ButtonImage("heat-up", name)
-            self.heaters.append(h)    
+            self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))     
     
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:
