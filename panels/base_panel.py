@@ -201,9 +201,7 @@ class BasePanel(ScreenPanel):
         if self._printer.has_heated_bed():       
             add_heaters = self._printer.get_heaters()
         for h in add_heaters:
-            if h == "heater_bed":
-                self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))    
-            else:
+            if h == "heat-up":
                 name = " ".join(h.split(" ")[1:])
                 self.labels[h] = self._gtk.ButtonImage("heat-up", name)
             self.heaters.append(h)    
