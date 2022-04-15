@@ -138,8 +138,8 @@ class BasePanel(ScreenPanel):
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         self.control['temp_box'].pack_start(self.labels["%s_box" %  self.current_extruder], True, 5, 5)
 
-        # if self._printer.has_heated_bed():
-        if  self._printer.get_tools():    
+        if self._printer.has_heated_bed():
+            
             heater_bed = self._gtk.Image("heat-up.svg", None, .4, .4)
             self.labels['heat-up'] = Gtk.Label(label="25 C")
             # self.labels['heat_up'].get_style_context().add_class("printing-info")
@@ -147,7 +147,7 @@ class BasePanel(ScreenPanel):
             heater_bed_box.pack_start(heater_bed, True, 5, 5)
             heater_bed_box.pack_start(self.labels['heat-up'], True, 3, 3)
             self.control['temp_box'].pack_end(heater_bed_box, True, 3, 3)
-        if self._printer.has_heated_bed():
+        # if self._printer.has_heated_bed():
             heater_bed = self._gtk.Image("bed.svg", None, .4, .4)
             self.labels['heater_bed'] = Gtk.Label(label="20 C")
             # self.labels['heater_bed'].get_style_context().add_class("printing-info")
