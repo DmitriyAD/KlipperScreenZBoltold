@@ -37,10 +37,10 @@ class MainPanel(MenuPanel):
         for h in add_heaters:
             if h == "heater_bed":
                 self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
-            else:
-                name = " ".join(h.split(" ")[1:])
-                self.labels[h] = self._gtk.ButtonImage("heat-up", name)
-            self.heaters.append(h)
+            # else:
+            #     name = " ".join(h.split(" ")[1:])
+            #     self.labels[h] = self._gtk.ButtonImage("heat-up", name)
+            # self.heaters.append(h)
 
         i = 0
         cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
