@@ -140,7 +140,7 @@ class BasePanel(ScreenPanel):
 
         if self._printer.has_heated_bed():
             
-            heater_bed = self._gtk.Image("heat-up.svg", None, .4, .4)
+            heater_bed = self._gtk.ButtonImage("heat-up", None, .4, .4)
             self.labels['heat-up'] = Gtk.Label(label="25 C")
             # self.labels['heat_up'].get_style_context().add_class("printing-info")
             heater_bed_box = Gtk.Box(spacing=0)
