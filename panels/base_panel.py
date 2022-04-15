@@ -194,11 +194,8 @@ class BasePanel(ScreenPanel):
         if self._printer.has_heated_bed():
             self.labels["heater_bed"].set_label(
                 "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature"))) 
-            self.labels["heat-up"].set_label(self._gtk.ButtonImage("heat-up", ("Temperature"), "color4"))
-            self.labels['temperature'].connect("clicked", self.menu_item_clicked, "temperature", {
-            "name": "Temperature",
-            "panel": "temperature"
-        })     
+            self.labels["heat-up"].set_label("help")
+            
         for x in self._printer.get_tools():
             self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))     
     
