@@ -128,13 +128,13 @@ class BasePanel(ScreenPanel):
 
         i = 0
         for extruder in self._printer.get_tools():
-            self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
+            self.labels[extruder + '_box' + '_box'] = Gtk.Box(spacing=0)
             self.labels[extruder] = Gtk.Label(label="")
             # self.labels[extruder].get_style_context().add_class("printing-info")
             if i <= 4:
                 ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .4, .4)
-                self.labels[extruder + '_box' ].pack_start(ext_img, True, 3, 3)
-            self.labels[extruder + '_box' ].pack_start(self.labels[extruder], True, 3, 3)
+                self.labels[extruder + '_box' + '_box'  ].pack_start(ext_img, True, 3, 3)
+            self.labels[extruder + '_box' + '_box' ].pack_start(self.labels[extruder], True, 3, 3)
             i += 1
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
         self.control['temp_box'].pack_start(self.labels["%s_box" %  self.current_extruder], True, 5, 5)
