@@ -131,7 +131,7 @@ class BasePanel(ScreenPanel):
             self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
             self.labels[extruder] = Gtk.Label(label="")
             # self.labels[extruder].get_style_context().add_class("printing-info")
-            if i <= 5:
+            if i <= 4:
                 ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .4, .4)
                 self.labels[extruder + '_box' ].pack_start(ext_img, True, 3, 3)
             self.labels[extruder + '_box' ].pack_start(self.labels[extruder], True, 3, 3)
@@ -163,7 +163,7 @@ class BasePanel(ScreenPanel):
         size = self.control['time_box'].get_allocation().width
         self.layout.remove(self.control['time_box'])
         self.control['time_box'].set_size_request(size, self.title_spacing)
-        self.layout.put(self.control['time_box'], self._screen.width - size - 5, 0)
+        self.layout.put(self.control['time_box'], self._screen.width - size - 6, 0)
 
         GLib.timeout_add_seconds(1, self.update_time)
         self.update_time()
