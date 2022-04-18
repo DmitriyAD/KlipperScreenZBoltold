@@ -161,12 +161,12 @@ class JobStatusPanel(ScreenPanel):
         speed_box = Gtk.Box(spacing=0)
         speed_box.add(speed)
         speed_box.add(self.labels['speed'])
-        # extrusion = self._gtk.Image("extrude.svg", None, .6, .6)
-        # self.labels['extrusion'] = Gtk.Label(label="")
-        # self.labels['extrusion'].get_style_context().add_class("printing-info")
-        # extrusion_box = Gtk.Box(spacing=0)
-        # extrusion_box.add(extrusion)
-        # extrusion_box.add(self.labels['extrusion'])
+        extrusion = self._gtk.Image("extrude.svg", None, .6, .6)
+        self.labels['extrusion'] = Gtk.Label(label="")
+        self.labels['extrusion'].get_style_context().add_class("printing-info")
+        extrusion_box = Gtk.Box(spacing=0)
+        extrusion_box.add(extrusion)
+        extrusion_box.add(self.labels['extrusion'])
         fan = self._gtk.Image("fan.svg", None, .6, .6)
         self.labels['fan'] = Gtk.Label(label="")
         self.labels['fan'].get_style_context().add_class("printing-info")
@@ -176,7 +176,7 @@ class JobStatusPanel(ScreenPanel):
         sfe_grid = self._gtk.HomogeneousGrid()
         sfe_grid.set_hexpand(True)
         sfe_grid.attach(speed_box, 0, 0, 1, 1)
-        # sfe_grid.attach(extrusion_box, 1, 0, 1, 1)
+        sfe_grid.attach(extrusion_box, 1, 0, 1, 1)
         sfe_grid.attach(fan_box, 2, 0, 1, 1)
         self.labels['sfe_grid'] = sfe_grid
 
@@ -404,9 +404,9 @@ class JobStatusPanel(ScreenPanel):
         #     self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
 
         if "gcode_move" in data:
-            # if "extrude_factor" in data["gcode_move"]:
-            #     self.extrusion = int(data["gcode_move"]["extrude_factor"]*100)
-            #     self.labels['extrusion'].set_text("%3d%%" % self.extrusion)
+            if "extrude_factor" in data["gcode_move"]:
+                self.extrusion = int(data["gcode_move"]["extrude_factor"]*100)
+                self.labels['extrusion'].set_text("%3d%%" % self.extrusion)
             if "speed_factor" in data["gcode_move"]:
                 self.speed = int(data["gcode_move"]["speed_factor"]*100)
                 self.labels['speed'].set_text("%3d%%" % self.speed)
