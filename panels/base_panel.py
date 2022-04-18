@@ -63,11 +63,11 @@ class BasePanel(ScreenPanel):
             'macro_shortcut': 2,
             'printer_select': 2
         }
-        button_range = 3
+        button_range = 4
         if len(self._config.get_printers()) > 1:
-            self.locations['macro_shortcut'] = 3
+            self.locations['macro_shortcut'] = 4
             if self._config.get_main_config_option('side_macro_shortcut') == "True":
-                button_range = 4
+                button_range = 5
 
         for i in range(button_range):
             self.control['space%s' % i] = Gtk.Label("")
