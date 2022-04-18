@@ -204,7 +204,7 @@ class BasePanel(ScreenPanel):
         
             
         for x in self._printer.get_tools():
-            self.labels["heat-up"].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))     
+            self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))     
     
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:
