@@ -176,7 +176,7 @@ class JobStatusPanel(ScreenPanel):
         sfe_grid = self._gtk.HomogeneousGrid()
         sfe_grid.set_hexpand(True)
         sfe_grid.attach(speed_box, 0, 0, 1, 1)
-        sfe_grid.attach(extrusion_box, 1, 0, 1, 1)
+        # sfe_grid.attach(extrusion_box, 1, 0, 1, 1)
         sfe_grid.attach(fan_box, 2, 0, 1, 1)
         self.labels['sfe_grid'] = sfe_grid
 
