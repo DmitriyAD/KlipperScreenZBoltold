@@ -201,8 +201,7 @@ class Printer:
     def get_heaters(self):
         heaters = []
         if self.has_heated_bed():
-            heaters.append("heater_bed") 
-            heaters.append("heat-up")    
+            heaters.append("heater_bed")    
         for h in self.get_config_section_list("heater_generic "):
             heaters.append(h)
         for h in self.get_config_section_list("temperature_sensor "):
@@ -226,7 +225,6 @@ class Printer:
         }
 
         sections = ["bed_mesh", "bltouch", "probe", "quad_gantry_level", "z_tilt"]
-        # sections = [ "bltouch", "probe", "quad_gantry_level", "z_tilt"]
         for section in sections:
             if self.config_section_exists(section):
                 data["printer"][section] = self.get_config_section(section).copy()
@@ -283,7 +281,10 @@ class Printer:
 
     def has_heated_bed(self):
         if "heater_bed" in self.devices:
-            return True                 
+            return True   
+    def has_heated_up(self):
+        if "heat-up" in self.devices:
+            return True                       
        
 
     def section_exists(self, section):
