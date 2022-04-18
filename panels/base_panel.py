@@ -202,13 +202,15 @@ class BasePanel(ScreenPanel):
             self.heaters = []
             for h in self._printer.has_heated_bed :
                 if h == "heat-up":
-                    self.labels[h] = self.labels["heat-up"]
+                    self.labels[h] = x
+                    
                 self.heaters.append(h)    
             i = 0
             cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
             for h in self.heaters:
                 eq_grid.attach(self.labels[h], i % cols, int(i/cols), 1, 1)
                 i += 1 
+            self.labels["heat-up"].set_label(x)
             
                    
                  
