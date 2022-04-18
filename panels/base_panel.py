@@ -199,14 +199,17 @@ class BasePanel(ScreenPanel):
         if self._printer.has_heated_bed():
             self.labels["heater_bed"].set_label(
                 "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))  
-            # self.heaters = []
-            # i = 0
-            # cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
-            # for h in self.heaters:
-            #     eq_grid.attach(self.labels[h], i % cols, int(i/cols), 1, 1)
-            #     i += 1 
+            self.heaters = []
+            for h in self._printer.has_heated_bed :
+                if h == "heat-up":
+                    self.labels["heat-up"].set_label (h)
+            i = 0
+            cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
+            for h in self.heaters:
+                eq_grid.attach(self.labels[h], i % cols, int(i/cols), 1, 1)
+                i += 1 
             
-            self.labels["heat-up"].set_label ("help")       
+                   
                  
             
         
