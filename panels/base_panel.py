@@ -60,8 +60,8 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
 
         self.locations = {
-            'macro_shortcut': 2,
-            'printer_select': 2
+            'macro_shortcut': 3,
+            'printer_select': 3
         }
         button_range = 4
         if len(self._config.get_printers()) > 1:
