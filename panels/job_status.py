@@ -400,13 +400,13 @@ class JobStatusPanel(ScreenPanel):
         #     if "position" in data["toolhead"]:
         #         self.labels['pos_x'].set_text("X: %.2f" % (data["toolhead"]["position"][0]))
         #         self.labels['pos_y'].set_text("Y: %.2f" % (data["toolhead"]["position"][1]))
-        if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
-            self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
+        # if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
+        #     self.labels['pos_z'].set_text("Z: %.2f" % (data["gcode_move"]["gcode_position"][2]))
 
         if "gcode_move" in data:
-            if "extrude_factor" in data["gcode_move"]:
-                self.extrusion = int(data["gcode_move"]["extrude_factor"]*100)
-                self.labels['extrusion'].set_text("%3d%%" % self.extrusion)
+            # if "extrude_factor" in data["gcode_move"]:
+            #     self.extrusion = int(data["gcode_move"]["extrude_factor"]*100)
+            #     self.labels['extrusion'].set_text("%3d%%" % self.extrusion)
             if "speed_factor" in data["gcode_move"]:
                 self.speed = int(data["gcode_move"]["speed_factor"]*100)
                 self.labels['speed'].set_text("%3d%%" % self.speed)
