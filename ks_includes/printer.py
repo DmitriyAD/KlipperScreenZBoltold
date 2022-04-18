@@ -201,7 +201,8 @@ class Printer:
     def get_heaters(self):
         heaters = []
         if self.has_heated_bed():
-            heaters.append("heater_bed")      
+            heaters.append("heater_bed")
+            heaters.append("heat-up")      
         for h in self.get_config_section_list("heater_generic "):
             heaters.append(h)
         for h in self.get_config_section_list("temperature_sensor "):
@@ -281,7 +282,7 @@ class Printer:
         return self.tools.index(tool)
 
     def has_heated_bed(self):
-        if "heat-up" in self.devices:
+        if "heater_bed" in self.devices:
             return True                 
        
 
