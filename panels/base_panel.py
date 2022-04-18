@@ -163,7 +163,7 @@ class BasePanel(ScreenPanel):
         size = self.control['time_box'].get_allocation().width
         self.layout.remove(self.control['time_box'])
         self.control['time_box'].set_size_request(size, self.title_spacing)
-        self.layout.put(self.control['time_box'], self._screen.width - size - 10, 0)
+        self.layout.put(self.control['time_box'], self._screen.width - size - 5, 0)
 
         GLib.timeout_add_seconds(1, self.update_time)
         self.update_time()
