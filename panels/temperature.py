@@ -202,7 +202,7 @@ class TemperaturePanel(ScreenPanel):
                 h,
                 self._printer.get_dev_stat(h, "temperature"),
                 self._printer.get_dev_stat(h, "target"),
-                None if h == "heater_bed" 
+                None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )
         return
 
