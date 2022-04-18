@@ -115,6 +115,7 @@ class BasePanel(ScreenPanel):
         self.layout.put(self.content, action_bar_width, self.title_spacing)
 
     def initialize(self, panel_name):
+        
         # Create gtk items here
         return
 
@@ -189,12 +190,22 @@ class BasePanel(ScreenPanel):
         return self.layout
 
     def process_update(self, action, data):
+        eq_grid = Gtk.Grid()
+        eq_grid.set_hexpand(True)
+        eq_grid.set_vexpand(True) 
+
         if action != "notify_status_update" or self._printer is None:
             return
         if self._printer.has_heated_bed():
             self.labels["heater_bed"].set_label(
                 "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))  
-            self.labels["heat-up"].set_label ("help")       
+            self.heaters = []
+            i = 0
+            cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
+            for h in self.heaters:
+                eq_grid.attach(self.labels[h], i % cols, int(i/cols), 1, 1)
+                i += 1 
+            self.labels["heat-up"].set_label (h)       
                  
             
         
