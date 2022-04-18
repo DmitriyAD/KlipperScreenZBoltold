@@ -60,14 +60,14 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
 
         self.locations = {
-            'macro_shortcut': 3,
-            'printer_select': 3
+            'macro_shortcut': 2,
+            'printer_select': 2
         }
-        button_range = 4
+        button_range = 3
         if len(self._config.get_printers()) > 1:
-            self.locations['macro_shortcut'] = 4
+            self.locations['macro_shortcut'] = 3
             if self._config.get_main_config_option('side_macro_shortcut') == "True":
-                button_range = 5
+                button_range = 4
 
         for i in range(button_range):
             self.control['space%s' % i] = Gtk.Label("")
@@ -131,7 +131,7 @@ class BasePanel(ScreenPanel):
             self.labels[extruder + '_box'] = Gtk.Box(spacing=0)
             self.labels[extruder] = Gtk.Label(label="")
             # self.labels[extruder].get_style_context().add_class("printing-info")
-            if i <= 4:
+            if i <= 5:
                 ext_img = self._gtk.Image("extruder-%s.svg" % i, None, .4, .4)
                 self.labels[extruder + '_box' ].pack_start(ext_img, True, 3, 3)
             self.labels[extruder + '_box' ].pack_start(self.labels[extruder], True, 3, 3)
