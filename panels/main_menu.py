@@ -34,7 +34,7 @@ class MainPanel(MenuPanel):
             i += 1
 
 
-        if self._printer.has_heated_bed():
+        if self._printer.get_heaters():
             self.labels["heater_bed"].set_label(
                 "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
         # add_heaters = self._printer.get_heaters()
