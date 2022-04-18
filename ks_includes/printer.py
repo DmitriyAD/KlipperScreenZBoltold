@@ -281,7 +281,7 @@ class Printer:
         return self.tools.index(tool)
 
     def has_heated_bed(self):
-        if "heater_bed" and "heat-up" in self.devices:
+        if "heat-up" in self.devices:
             return True                 
        
 
