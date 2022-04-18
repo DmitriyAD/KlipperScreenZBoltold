@@ -193,7 +193,7 @@ class BasePanel(ScreenPanel):
 
         if action != "notify_status_update" or self._printer is None:
             return
-        for h in self._printer.has_heated():
+        for h in self._printer.get_heaters():
             self.update_temp(
                 h,
                 self._printer.get_dev_stat(h, "temperature"),
