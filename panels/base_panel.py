@@ -140,23 +140,23 @@ class BasePanel(ScreenPanel):
         self.control['temp_box'].pack_start(self.labels["%s_box" %  self.current_extruder], True, 5, 5)
 
 
-        if self._printer.has_heat_up():
+        # if self._printer.has_heat_up():
             
-            heater_up = self._gtk.Image("heat-up.svg", None, .4, .4)
-            self.labels['heat-up'] = Gtk.Label(label="20 C")
-            heater_up_box = Gtk.Box(spacing=0)
-            heater_up_box.pack_start(heater_up, True, 7, 7)
-            heater_up_box.pack_start(self.labels['heat-up'], True, 5, 5)
-            self.control['temp_box'].pack_end(heater_up_box, True, 7, 7)
+        #     heater_up = self._gtk.Image("heat-up.svg", None, .4, .4)
+        #     self.labels['heat-up'] = Gtk.Label(label="20 C")
+        #     heater_up_box = Gtk.Box(spacing=0)
+        #     heater_up_box.pack_start(heater_up, True, 7, 7)
+        #     heater_up_box.pack_start(self.labels['heat-up'], True, 5, 5)
+        #     self.control['temp_box'].pack_end(heater_up_box, True, 7, 7)
 
         if self._printer.has_heated_bed():
 
-            # heater_bed = self._gtk.Image("heat-up.svg", None, .4, .4)
-            # self.labels['heat-up'] = Gtk.Label(label="20 C")
-            # heater_bed_box = Gtk.Box(spacing=0)
-            # heater_bed_box.pack_start(heater_bed, True, 5, 5)
-            # heater_bed_box.pack_start(self.labels['heat-up'], True, 3, 3)
-            # self.control['temp_box'].pack_end(heater_bed_box, True, 3, 3)
+            heater_up = self._gtk.Image("heat-up.svg", None, .4, .4)
+            self.labels['heat-up'] = Gtk.Label(label="20 C")
+            heater_up_box = Gtk.Box(spacing=0)
+            heater_up_box.pack_start(heater_up, True, 5, 5)
+            heater_up_box.pack_start(self.labels['heat-up'], True, 3, 3)
+            self.control['temp_box'].pack_end(heater_up_box, True, 3, 3)
 
         
             heater_bed = self._gtk.Image("bed.svg", None, .4, .4)
