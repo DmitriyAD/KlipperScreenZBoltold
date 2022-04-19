@@ -29,9 +29,8 @@ class MainPanel(MenuPanel):
 
         i = 0
         for x in self._printer.get_tools():
-            self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
+            self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0), command = self.change)
             self.heaters.append(x)
-            self.change
             i += 1
 
 
@@ -74,7 +73,10 @@ class MainPanel(MenuPanel):
     def activate(self):
         return
     def change(self):
-        i = 10
+        self.target_temps ={
+            "heater_bed": 10,
+            "extruder": 10
+        }
         return    
 
     def process_update(self, action, data):
