@@ -73,10 +73,7 @@ class MainPanel(MenuPanel):
     def activate(self):
         return
     def change(self):
-        self.target_temps ={
-            "heater_bed": 10,
-            "extruder": 10
-        }
+        print("hi")
         return    
 
     def process_update(self, action, data):
