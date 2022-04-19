@@ -32,7 +32,7 @@ class MainPanel(MenuPanel):
             self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
             self.heaters.append(x)
             self.change
-            i += self.change
+            i += 1
 
 
         
