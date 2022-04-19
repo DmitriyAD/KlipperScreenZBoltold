@@ -193,19 +193,12 @@ class BasePanel(ScreenPanel):
 
         if action != "notify_status_update" or self._printer is None:
             return
-        has_model = self._printer.has_heated_bed()
+        
         if self._printer.has_heated_bed():
-            for h in has_model:
-                if h =="heater_bed":
-                    self.labels["heater_bed"].set_label(
+            self.labels["heater_bed"].set_label(
                 "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
-                else:
-                    name = " ".join(h.split(" ")[1:])
-                    self.labels["heat-up"].set_label(
-                "%02d°" % round(self._printer.get_dev_stat("heat-up", name)))
-
-                    
-                
+            self.labels["heat-up"].set_label(
+                "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))    
            
               
                 
