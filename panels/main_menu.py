@@ -71,10 +71,7 @@ class MainPanel(MenuPanel):
         self.layout.show_all()
 
     def activate(self):
-        return
-    def change(self):
-    
-        return    
+        return   
 
     def process_update(self, action, data):
         if action != "notify_status_update":
