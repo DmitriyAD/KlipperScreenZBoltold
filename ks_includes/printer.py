@@ -94,7 +94,7 @@ class Printer:
             'webhooks'
         ]
 
-        for x in (self.get_tools() + self.get_heaters() + self.get_heat):
+        for x in (self.get_tools() + self.get_heaters() + self.get_heat()):
             if x in data:
                 for i in data[x]:
                     self.set_dev_stat(x, i, data[x][i])
