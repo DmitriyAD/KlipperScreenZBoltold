@@ -208,14 +208,14 @@ class Printer:
             heaters.append(h)
         return heaters
     def get_heat(self):
-        heaters = []
+        heatersb = []
         if self.has_heat_up():
-            heaters.append("heat-up")    
+            heatersb.append("heat-up")    
         for h in self.get_config_section_list("heater_generic "):
-            heaters.append(h)
+            heatersb.append(h)
         for h in self.get_config_section_list("temperature_sensor "):
-            heaters.append(h)
-        return heaters    
+            heatersb.append(h)
+        return heatersb    
 
     def get_printer_status_data(self):
         data = {
