@@ -194,13 +194,15 @@ class BasePanel(ScreenPanel):
         if action != "notify_status_update" or self._printer is None:
             return
         
-        # if self._printer.has_heated_bed():
-        #     self.labels["heater_bed"].set_label(
-        #         "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
+        if self._printer.has_heated_bed():
+            self.labels["heater_bed"].set_label(
+                "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
+            self.labels["heat-up"].set_label(
+                "%02d°" % round(self._printer.get_dev_stat("heater_generic", "temperature")))    
               
                 
-        # for x in self._printer.get_tools():
-        #     self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))     
+        for x in self._printer.get_tools():
+            self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))     
     
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:
@@ -208,20 +210,6 @@ class BasePanel(ScreenPanel):
                 self.current_extruder = data["toolhead"]["extruder"]
                 self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, 3, 3)
                 self.control['temp_box'].show_all()
-        for x in self._printer.get_tools():
-            self.update_temp(
-                x,
-                self._printer.get_dev_stat(x, "temperature"),
-                self._printer.get_dev_stat(x, "target")
-            )
-        for h in self._printer.get_heaters():
-            self.update_temp(
-                h,
-                self._printer.get_dev_stat(h, "temperature"),
-                self._printer.get_dev_stat(h, "target"),
-                None if h == "heater_bed" else " ".join(h.split(" ")[1:])
-            )   
-        return            
 
 
     def remove(self, widget):
