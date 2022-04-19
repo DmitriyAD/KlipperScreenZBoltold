@@ -91,3 +91,11 @@ class MainPanel(MenuPanel):
                 None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )   
         return
+        for z in self._printer.get_heat():
+            self.update_temp(
+                z,
+                self._printer.get_dev_stat(z, "temperature"),
+                self._printer.get_dev_stat(z, "target"),
+                None if h == "heat-up" else " ".join(z.split(" ")[1:])
+            )   
+        return
