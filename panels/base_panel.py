@@ -19,7 +19,7 @@ class BasePanel(ScreenPanel):
         self.current_panel = None
         self.time_min = -1
         self.time_format = self._config.get_main_config_option("24htime")
-        self.title_spacing = self._gtk.font_size * 2
+        self.title_spacing = self._gtk.font_size * 5
 
         self.buttons_showing = {
             'back': False if back else True,
