@@ -155,7 +155,7 @@ class BasePanel(ScreenPanel):
             heater_bed_box = Gtk.Box(spacing=0)
             heater_bed_box.pack_start(heater_bed, True, 5, 5)
             heater_bed_box.pack_start(self.labels['heat-up'], True, 3, 3)
-            # self.control['temp_box'].pack_end(heater_bed_box, True, 3, 3)
+            self.control['temp_box'].pack_end(heater_bed_box, True, 3, 3)
         
             heater_bed = self._gtk.Image("bed.svg", None, .4, .4)
             self.labels['heater_bed'] = Gtk.Label(label="20 C")
