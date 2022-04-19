@@ -94,7 +94,7 @@ class Printer:
             'webhooks'
         ]
 
-        for x in (self.get_tools() + self.get_heaters() + self.get_heat() ):
+        for x in (self.get_tools() + self.get_heaters()):
             if x in data:
                 for i in data[x]:
                     self.set_dev_stat(x, i, data[x][i])
@@ -201,21 +201,15 @@ class Printer:
     def get_heaters(self):
         heaters = []
         if self.has_heated_bed():
-            heaters.append("heater_bed")    
+            heaters.append("heater_bed") 
+        if self.has_heat_up():
+            heaters.append("heat-up")       
         for h in self.get_config_section_list("heater_generic "):
             heaters.append(h)
         for h in self.get_config_section_list("temperature_sensor "):
             heaters.append(h)
         return heaters
-    def get_heat(self):
-        heatersb = []
-        if self.has_heat_up():
-            heatersb.append("heat-up")    
-        for h in self.get_config_section_list("heater_generic "):
-            heatersb.append(h)
-        for h in self.get_config_section_list("temperature_sensor "):
-            heatersb.append(h)
-        return heatersb    
+   
 
     def get_printer_status_data(self):
         data = {
