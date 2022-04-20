@@ -28,7 +28,7 @@ class MainPanel(MenuPanel):
 
         
 
-        _ = self.lang.gettext
+
         self.heaters = []
 
         i = 0
@@ -41,9 +41,6 @@ class MainPanel(MenuPanel):
         for h in add_heaters:
             if h == "heater_bed":
                 self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
-                self.labels[h].connect("clicked", self._screen._confirm_send_action,
-                         _("Are you sure?"))
-                self.labels[h].set_vexpand(False) 
             else:
                 name = " ".join(h.split(" ")[1:])
                 self.labels[h] = self._gtk.ButtonImage("heat-up", name)
