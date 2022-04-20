@@ -48,7 +48,7 @@ class MainPanel(MenuPanel):
                 self.labels[h].connect("clicked", self.menu_item_clicked, "temperature", {
                 "name": "Temperature",
                 "panel": "temperature"
-                })
+                }, self.show_numpad)
             else:
                 name = " ".join(h.split(" ")[1:])
                 self.labels[h] = self._gtk.ButtonImage("heat-up", name)
@@ -101,3 +101,55 @@ class MainPanel(MenuPanel):
                 None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )
         return
+
+    def show_numpad(self, widget):
+        _ = self.lang.gettext
+
+        numpad = self._gtk.HomogeneousGrid()
+        numpad.set_direction(Gtk.TextDirection.LTR)
+
+        keys = [
+            ['1', 'numpad_tleft'],
+            ['2', 'numpad_top'],
+            ['3', 'numpad_tright'],
+            ['4', 'numpad_left'],
+            ['5', 'numpad_button'],
+            ['6', 'numpad_right'],
+            ['7', 'numpad_left'],
+            ['8', 'numpad_button'],
+            ['9', 'numpad_right'],
+            ['B', 'numpad_bleft'],
+            ['0', 'numpad_bottom'],
+            ['E', 'numpad_bright']
+        ]
+        for i in range(len(keys)):
+            id = 'button_' + str(keys[i][0])
+            if keys[i][0] == "B":
+                self.labels[id] = self._gtk.ButtonImage("backspace", None, None, 1, 1)
+            elif keys[i][0] == "E":
+                self.labels[id] = self._gtk.ButtonImage("complete", None, None, 1, 1)
+            else:
+                self.labels[id] = Gtk.Button(keys[i][0])
+            self.labels[id].connect('clicked', self.update_entry, keys[i][0])
+            ctx = self.labels[id].get_style_context()
+            ctx.add_class(keys[i][1])
+            numpad.attach(self.labels[id], i % 3, i/3, 1, 1)
+
+        self.labels["keypad"] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.labels['entry'] = Gtk.Entry()
+        self.labels['entry'].props.xalign = 0.5
+        ctx = self.labels['entry'].get_style_context()
+
+        b = self._gtk.ButtonImage('cancel', _('Close'), None, 1, 1)
+        b.connect("clicked", self.hide_numpad)
+
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.add(self.labels['entry'])
+        box.add(numpad)
+        box.add(b)
+
+        self.labels["keypad"] = numpad
+
+        self.grid.remove_column(1)
+        self.grid.attach(box, 1, 0, 1, 1)
+        self.grid.show_all()    
