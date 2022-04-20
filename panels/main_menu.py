@@ -72,9 +72,7 @@ class MainPanel(MenuPanel):
         self.layout.show_all()
 
     def activate(self):
-        return 
-    def update(self):
-        return "%s T%s S%s" % (KlippyGcodes.SET_EXT_TEMP, 0, 180)     
+        return      
 
     def process_update(self, action, data):
         if action != "notify_status_update":
