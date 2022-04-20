@@ -26,11 +26,11 @@ class MainPanel(MenuPanel):
         eq_grid.set_hexpand(True)
         eq_grid.set_vexpand(True)
 
-
-        # temp = self._gtk.ButtonImage('shutdown', _('System\nShutdown'), 'color4')
-        # temp.connect("clicked", self._screen._confirm_send_action,
-        #                  _("Are you sure you wish to shutdown the system?"), "machine.shutdown")
-        # temp.set_vexpand(False) 
+        _ = self.lang.gettext
+        temp = self._gtk.ButtonImage('bed')
+        temp.connect("clicked", self._screen._confirm_send_action,
+                         _("Are you sure?"))
+        temp.set_vexpand(False) 
 
 
         self.heaters = []
