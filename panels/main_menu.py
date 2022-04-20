@@ -26,12 +26,18 @@ class MainPanel(MenuPanel):
         eq_grid.set_hexpand(True)
         eq_grid.set_vexpand(True)
 
+
+        # temp = self._gtk.ButtonImage('shutdown', _('System\nShutdown'), 'color4')
+        # temp.connect("clicked", self._screen._confirm_send_action,
+        #                  _("Are you sure you wish to shutdown the system?"), "machine.shutdown")
+        # temp.set_vexpand(False) 
+
+
         self.heaters = []
 
         i = 0
         for x in self._printer.get_tools():
             self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            self.labels[x].connect("clicked", self._screen._confirm_send_action, _("Are you sure?"), "machine.reboot")
             self.heaters.append(x)
             i += 1
 
