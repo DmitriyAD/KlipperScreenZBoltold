@@ -151,7 +151,7 @@ class BasePanel(ScreenPanel):
 
         if self._printer.has_heated_bed():
 
-            heater_up = self._gtk.self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
+            heater_up = self._gtk.self._gtk.ButtonImage("heat-up", self._gtk.formatTemperatureString(0, 0))
             self.labels['heat-up'] = Gtk.Label(label="20 C")
             heater_up_box = Gtk.Box(spacing=0)
             heater_up_box.pack_start(heater_up, True, 5, 5)
