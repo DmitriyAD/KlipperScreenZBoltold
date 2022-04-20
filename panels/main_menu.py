@@ -40,7 +40,7 @@ class MainPanel(MenuPanel):
                 self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
             else:
                 name = " ".join(h.split(" ")[1:])
-                self.labels[h] = self._gtk.ButtonImage("heat-up", name)
+                self.labels[h] = self._gtk.ButtonImage("heat-up")
             self.heaters.append(h)
 
         i = 0
