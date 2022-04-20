@@ -1,3 +1,4 @@
+from KlipperScreen.ks_includes.KlippyGcodes import KlippyGcodes
 import gi
 import logging
 
@@ -29,7 +30,7 @@ class MainPanel(MenuPanel):
 
         i = 0
         for x in self._printer.get_tools():
-            self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(50, 0))
+            self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0), command = self.update)
             self.heaters.append(x)
             i += 1
 
@@ -71,7 +72,9 @@ class MainPanel(MenuPanel):
         self.layout.show_all()
 
     def activate(self):
-        return   
+        return 
+    def update(self):
+        return "%s T%s S%s" % (KlippyGcodes.SET_EXT_TEMP, 0, 180)     
 
     def process_update(self, action, data):
         if action != "notify_status_update":
