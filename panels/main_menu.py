@@ -34,12 +34,10 @@ class MainPanel(MenuPanel):
             self.heaters.append(x)
             i += 1
 
-
-        
         add_heaters = self._printer.get_heaters()
         for h in add_heaters:
             if h == "heater_bed":
-                self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))    
+                self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
             else:
                 name = " ".join(h.split(" ")[1:])
                 self.labels[h] = self._gtk.ButtonImage("heat-up", name)
@@ -72,7 +70,7 @@ class MainPanel(MenuPanel):
         self.layout.show_all()
 
     def activate(self):
-        return      
+        return
 
     def process_update(self, action, data):
         if action != "notify_status_update":
@@ -90,5 +88,5 @@ class MainPanel(MenuPanel):
                 self._printer.get_dev_stat(h, "temperature"),
                 self._printer.get_dev_stat(h, "target"),
                 None if h == "heater_bed" else " ".join(h.split(" ")[1:])
-            )   
+            )
         return
