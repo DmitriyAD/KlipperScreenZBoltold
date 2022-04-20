@@ -64,7 +64,7 @@ class PreheatPanel(ScreenPanel):
 
 
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color%d" % ((i % 4)+1))
-        cooldown.connect("clicked",  self._confirm_send_action_response , _("Are you sure you wish to shutdown the system?"), "cooldown" )
+        cooldown.connect("clicked",  self._confirm_send_action , _("Are you sure you wish to shutdown the system?"), "cooldown" )
         cooldown.connect("clicked",  self.set_temperature ,  "cooldown")
                          
         row = int(i/2) if i % 2 == 0 else int(i/2)+1
