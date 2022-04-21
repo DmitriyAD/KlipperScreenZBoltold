@@ -63,7 +63,7 @@ class PreheatPanel(ScreenPanel):
             i += 1
 
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color%d" % ((i % 4)+1))
-        cooldown.conenct("clicked", self._confirm)
+        cooldown.conenct("clicked", self._confirm, "cooldown")
         # cooldown.connect("clicked",self.set_temperature, "cooldown")
         
         
@@ -156,7 +156,7 @@ class PreheatPanel(ScreenPanel):
 
     def _confirm(self, widget, response_id, params):
         if response_id == Gtk.ResponseType.OK:
-            self.set_temperature, "cooldown"
+            self.set_temperature
             self._send_action(widget, params)
 
         widget.destroy()
