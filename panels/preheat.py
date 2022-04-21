@@ -156,7 +156,7 @@ class PreheatPanel(ScreenPanel):
 
     def _confirm(self, widget, response_id, params):
         if response_id == Gtk.ResponseType.OK:
-            self.set_temperature
+            
             self._send_action(widget, params)
 
         widget.destroy()
