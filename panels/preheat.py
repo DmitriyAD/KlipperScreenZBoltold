@@ -154,10 +154,3 @@ class PreheatPanel(ScreenPanel):
                 self._printer.get_dev_stat(h, "target"),
                 None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )
-
-    def _confirm(self, widget, response_id, params):
-        if response_id == Gtk.ResponseType.OK:
-            
-            self._send_action(widget, params)
-
-        widget.destroy()
