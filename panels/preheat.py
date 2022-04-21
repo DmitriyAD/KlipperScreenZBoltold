@@ -104,10 +104,10 @@ class PreheatPanel(ScreenPanel):
         self.labels[heater].get_style_context().add_class('button_active')
 
     def set_temperature(self, widget, setting):
-        
+        _ = self.lang.gettext
+        self._screen._confirm_send_action,_("Are you sure you wish to reboot the system?")
         if setting == "cooldown":
-            _ = self.lang.gettext
-            self._screen._confirm_send_action,_("Are you sure you wish to reboot the system?")
+           
             for heater in self.active_heaters:
                 logging.info("Setting %s to %d" % (heater, 0))
                 if heater.startswith('heater_generic '):
