@@ -110,6 +110,8 @@ class PreheatPanel(ScreenPanel):
 
     def set_temperature(self, widget, setting):
         if setting == "cooldown":
+            _ = self.lang.gettext
+            self._screen._confirm_send_action,_("sos?"), None
             for heater in self.active_heaters:
                 logging.info("Setting %s to %d" % (heater, 0))
                 if heater.startswith('heater_generic '):
