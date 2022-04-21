@@ -63,29 +63,10 @@ class PreheatPanel(ScreenPanel):
             i += 1
 
 
-
-        
-
-        scroll = Gtk.ScrolledWindow()
-        scroll.set_property("overlay-scrolling", False)
-        scroll.set_hexpand(True)
-        scroll.set_vexpand(True)
-        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)    
-        label1 = Gtk.Label()
-        grid1 = Gtk.Grid()
-        grid1.set_column_homogeneous(True)
-        grid1.set_halign(Gtk.Align.CENTER)
-        grid1.set_valign(Gtk.Align.CENTER)
-        i = 0
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color%d" % ((i % 4)+1))
         cooldown.connect("clicked", self.set_temperature, "cooldown")
-        label1.set_markup(_("Do you wants?"))
-        grid1.attach(label1, 0, i, 1, 1)
-        scroll.add(grid)
-        recoverybuttons = [
-                        
-                        {"name": _("Back"), "response": Gtk.ResponseType.CANCEL}
-                    ]
+        label = Gtk.Label()
+        label.set_markup("asd")
 
         row = int(i/2) if i % 2 == 0 else int(i/2)+1
         self.labels["control_grid"].attach(cooldown, i % 2, int(i/2), 1, 1)
