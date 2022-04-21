@@ -765,7 +765,7 @@ class KlipperScreen(Gtk.Window):
 
         dialog = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
 
-    def send_action322(self, widget, text, method, params={}):
+    def send_action322(self, widget, text):
         _ = self.lang.gettext
 
         buttons = [
@@ -789,7 +789,7 @@ class KlipperScreen(Gtk.Window):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dialog = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
+        dialog = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response)
     def _confirm_send_action_response(self, widget, response_id, method, params):
         if response_id == Gtk.ResponseType.OK:
             self._send_action(widget, method, params)
