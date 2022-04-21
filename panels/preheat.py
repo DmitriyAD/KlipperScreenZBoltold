@@ -62,10 +62,10 @@ class PreheatPanel(ScreenPanel):
                 i % 2, int(i/2), 1, 1)
             i += 1
 
-        label = Gtk.Label()
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color%d" % ((i % 4)+1))
-        cooldown.connect("clicked", label.set_markup("asd"),self.set_temperature, "cooldown")
-        
+        cooldown.connect("clicked",self.set_temperature, "cooldown")
+        cooldown.connect("clicked", self._screen._confirm_send_action,
+                       _("Are you sure you wish to reboot the system?"))
         
 
         row = int(i/2) if i % 2 == 0 else int(i/2)+1
