@@ -30,7 +30,7 @@ class MainPanel(MenuPanel):
         i = 0
         for x in self._printer.get_tools():
             self.labels[x] = self._gtk.ButtonImage("extruder-"+str(i), self._gtk.formatTemperatureString(0, 0))
-            self.labels[x].connect("clicked", self.menu_item_clicked, self.select_heater , "temperature", {
+            self.labels[x].connect("clicked", self.menu_item_clicked, "temperature", {
             "name": "Temperature",
             "panel": "temperature"
             
@@ -88,7 +88,7 @@ class MainPanel(MenuPanel):
 
         self.active_heaters.append(heater)
         self.labels[heater].get_style_context().add_class('button_active')
-        
+
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
