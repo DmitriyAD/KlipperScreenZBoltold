@@ -42,7 +42,7 @@ class MainPanel(MenuPanel):
         for h in add_heaters:
             if h == "heater_bed":
                 self.labels[h] = self._gtk.ButtonImage("bed", self._gtk.formatTemperatureString(0, 0))
-                self.labels[x].connect("clicked", self.menu_item_clicked, "temperature", {
+                self.labels[h].connect("clicked", self.menu_item_clicked, "temperature", {
                 "name": "Temperature",
                 "panel": "temperature"
             
