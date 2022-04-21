@@ -224,7 +224,7 @@ class KlipperScreen(Gtk.Window):
             "ready": self.state_ready,
             "startup": self.state_startup,
             "shutdown": self.state_shutdown,
-            "cooldown": self.set_temperature
+            "cooldown": self.set_temperaturetozero
         })
 
         powerdevs = self.apiclient.send_request("machine/device_power/devices")
@@ -693,39 +693,22 @@ class KlipperScreen(Gtk.Window):
         self.base_panel.show_macro_shortcut(False)
         self.printer_initializing(_("Klipper has shutdown"))
 
-    def set_temperature(self, widget, setting):
-        if setting == "cooldown":
-            for heater in self.active_heaters:
-                logging.info("Setting %s to %d" % (heater, 0))
-                if heater.startswith('heater_generic '):
-                    self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), 0)
-                elif heater.startswith('heater_bed'):
-                    self._screen._ws.klippy.set_bed_temp(0)
-                    self._printer.set_dev_stat(heater, "target", 0)
-                else:
-                    self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), 0)
-                    self._printer.set_dev_stat(heater, "target", 0)
-            return
-            
-
+    def set_temperaturetozero(self, widget, setting):
         for heater in self.active_heaters:
+            logging.info("Setting %s to %d" % (heater, 0))
             if heater.startswith('heater_generic '):
-                logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['heater_generic']))
-                self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]),
-                                                        self.preheat_options[setting]["heater_generic"])
+                self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), 0)
             elif heater.startswith('heater_bed'):
-                logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['bed']))
-                self._screen._ws.klippy.set_bed_temp(self.preheat_options[setting]["bed"])
-                self._printer.set_dev_stat(heater, "target", int(self.preheat_options[setting]["bed"]))
+                self._screen._ws.klippy.set_bed_temp(0)
+                self._printer.set_dev_stat(heater, "target", 0)
             else:
-                logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['extruder']))
-                self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater),
-                                                      self.preheat_options[setting]["extruder"])
-                self._printer.set_dev_stat(heater, "target", int(self.preheat_options[setting]["extruder"]))
-
-        if self.preheat_options[setting]['gcode']:
-            self._screen._ws.klippy.gcode_script(self.preheat_options[setting]['gcode'])
+                self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), 0)
+                self._printer.set_dev_stat(heater, "target", 0)
+        return
             
+
+    
+
     def toggle_macro_shortcut(self, value):
         if value is True:
             self.base_panel.show_macro_shortcut(True, True)
