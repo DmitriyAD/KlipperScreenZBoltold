@@ -63,9 +63,9 @@ class PreheatPanel(ScreenPanel):
             i += 1
 
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color%d" % ((i % 4)+1))
-        cooldown.connect("clicked",self.set_temperature, "cooldown")
-        cooldown.connect("clicked", self._screen._confirm_send_action,
-                       _("Are you sure you wish to reboot the system?"))
+        cooldown.conenct("clicked", self._confirm)
+        # cooldown.connect("clicked",self.set_temperature, "cooldown")
+        
         
 
         row = int(i/2) if i % 2 == 0 else int(i/2)+1
@@ -153,3 +153,10 @@ class PreheatPanel(ScreenPanel):
                 self._printer.get_dev_stat(h, "target"),
                 None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )
+
+    def _confirm(self, widget, response_id, params):
+        if response_id == Gtk.ResponseType.OK:
+            self.set_temperature, "cooldown"
+            self._send_action(widget, params)
+
+        widget.destroy()
