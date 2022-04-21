@@ -110,7 +110,6 @@ class PreheatPanel(ScreenPanel):
 
     def set_temperature(self, widget, setting):
         if setting == "cooldown":
-            self.show_popup_message("asdasd")
             for heater in self.active_heaters:
                 logging.info("Setting %s to %d" % (heater, 0))
                 if heater.startswith('heater_generic '):
@@ -158,34 +157,4 @@ class PreheatPanel(ScreenPanel):
                 self._printer.get_dev_stat(h, "target"),
                 None if h == "heater_bed" else " ".join(h.split(" ")[1:])
             )
-    def show_popup_message(self, message):
-        if self.popup_message is not None:
-            self.close_popup_message()
-
-        box = Gtk.Box()
-        box.get_style_context().add_class("message_popup")
-        box.set_size_request(self.width, self.gtk.get_header_size())
-        label = Gtk.Label()
-        if "must home axis first" in message.lower():
-            message = "Must home all axis first."
-        label.set_text(message)
-
-        close = Gtk.Button.new_with_label("X")
-        close.set_can_focus(False)
-        close.props.relief = Gtk.ReliefStyle.NONE
-        close.connect("clicked", self.close_popup_message)
-
-        box.pack_start(label, True, True, 0)
-        box.pack_end(close, False, False, 0)
-        box.set_halign(Gtk.Align.CENTER)
-
-        cur_panel = self.panels[self._cur_panels[-1]]
-
-        self.base_panel.get().put(box, 0, 0)
-
-        self.show_all()
-        self.popup_message = box
-
-        GLib.timeout_add(10000, self.close_popup_message)
-
-        return False        
+       
