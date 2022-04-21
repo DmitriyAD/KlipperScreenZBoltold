@@ -64,9 +64,9 @@ class PreheatPanel(ScreenPanel):
 
 
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color%d" % ((i % 4)+1))
-        # cooldown.connect("clicked",  self.set_temperature ,  "cooldown")
-        cooldown.connect("clicked",  self._screen._confirm_send_action,
-                       _("Остудить?"), self.set_temperature )
+        cooldown.connect("clicked",  self.set_temperature ,  "cooldown")
+        # cooldown.connect("clicked",  self._screen._confirm_send_action,
+        #                _("Остудить?"), self.set_temperature ,  "cooldown")
                          
         row = int(i/2) if i % 2 == 0 else int(i/2)+1
         self.labels["control_grid"].attach(cooldown, i % 2, int(i/2), 1, 1)
@@ -104,18 +104,21 @@ class PreheatPanel(ScreenPanel):
         self.active_heaters.append(heater)
         self.labels[heater].get_style_context().add_class('button_active')
 
-    def set_temperature(self, widget):
+    def set_temperature(self, widget, setting):
+        if setting == "cooldown":
+            for heater in self.active_heaters:
+                logging.info("Setting %s to %d" % (heater, 0))
+                if heater.startswith('heater_generic '):
+                    self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), 0)
+                elif heater.startswith('heater_bed'):
+                    self._screen._ws.klippy.set_bed_temp(0)
+                    self._printer.set_dev_stat(heater, "target", 0)   
+                else:
+                    self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), 0)
+                    self._printer.set_dev_stat(heater, "target", 0)
+            return
+
         for heater in self.active_heaters:
-            logging.info("Setting %s to %d" % (heater, 0))
-            if heater.startswith('heater_generic '):
-                self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]), 0)
-            elif heater.startswith('heater_bed'):
-                 self._screen._ws.klippy.set_bed_temp(0)
-                 self._printer.set_dev_stat(heater, "target", 0)   
-            else:
-                self._screen._ws.klippy.set_tool_temp(self._printer.get_tool_number(heater), 0)
-                self._printer.set_dev_stat(heater, "target", 0)
-    
             if heater.startswith('heater_generic '):
                 logging.info("Setting %s to %d" % (heater, self.preheat_options[setting]['heater_generic']))
                 self._screen._ws.klippy.set_heater_temp(" ".join(heater.split(" ")[1:]),
