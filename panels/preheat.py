@@ -64,7 +64,7 @@ class PreheatPanel(ScreenPanel):
             i += 1
 
         cooldown = self._gtk.ButtonImage('cool-down', _('Cooldown'), "color%d" % ((i % 4)+1))
-        if cooldown.connect("clicked" ,self._screen._confirm_send_actions,_("sdfdfsdfsdfsdf!?"), "cooldown"):
+        if cooldown.connect("clicked" ,self._screen._confirm_send_actions,_("The process of cooling the temperatures of the table and extruder is started"), "cooldown"):
            cooldown.connect("clicked",self.set_temperature, "cooldown")  
         
         row = int(i/2) if i % 2 == 0 else int(i/2)+1
