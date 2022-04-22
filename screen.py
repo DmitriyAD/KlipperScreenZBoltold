@@ -775,6 +775,39 @@ class KlipperScreen(Gtk.Window):
     def _send_action(self, widget, method, params):
         self._ws.send_method(method, params)
 
+    def _confirm_send_actions(self, widget, text, method, params={}):
+        _ = self.lang.gettext
+
+        buttons = [
+            {"name": _("Back"), "response": Gtk.ResponseType.OK},
+        ]
+
+        try:
+            env = Environment(extensions=["jinja2.ext.i18n"])
+            env.install_gettext_translations(self.lang)
+            j2_temp = env.from_string(text)
+            text = j2_temp.render()
+        except Exception:
+            logging.debug("Error parsing jinja for confirm_send_action")
+
+        label = Gtk.Label()
+        label.set_markup(text)
+        label.set_hexpand(True)
+        label.set_halign(Gtk.Align.CENTER)
+        label.set_vexpand(True)
+        label.set_valign(Gtk.Align.CENTER)
+        label.set_line_wrap(True)
+        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+
+        dialog = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_responses, method, params)
+
+   
+    def _confirm_send_action_responses(self, widget, response_id, method, params):
+        if response_id == Gtk.ResponseType.OK:
+            self._send_action(widget, method, params)
+
+        widget.destroy()
+       
     def printer_initializing(self, text=None):
         self.shutdown = True
         self.close_popup_message()
