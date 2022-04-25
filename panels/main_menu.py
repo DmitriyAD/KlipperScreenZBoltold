@@ -47,6 +47,8 @@ class MainPanel(MenuPanel):
                 "panel": "temperature"
             
                 })
+                if not (h.startswith("temperature_sensor")):
+                    self.labels[h].connect('clicked', self.select_heater, h)
             else:
                 name = " ".join(h.split(" ")[1:])
                 self.labels[h] = self._gtk.ButtonImage("heat-up", name)
