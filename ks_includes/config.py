@@ -358,8 +358,8 @@ class KlipperScreenConfig:
             path = os.path.expanduser("~/")
             if os.path.exists(path+"klipper_config/"):
                 path = path + "klipper_config/KlipperScreen.conf"
-            else:
-                path = path + "KlipperScreen.conf"
+            # else:
+            #     path = path + "KlipperScreen.conf"
 
         try:
             file = open(path, 'w')
