@@ -60,7 +60,7 @@ class Printer:
                     "temperature": 0,
                     "target": 0
                 }
-            if x == 'heat-up' or x == 'heat_up':
+            if  x == 'heat_up':
                 self.devices[x] = {
                     "temperature" :0,
                     "target " :0
