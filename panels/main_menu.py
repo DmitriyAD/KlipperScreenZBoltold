@@ -48,7 +48,7 @@ class MainPanel(MenuPanel):
             
                 })
             else:
-                name = " ".join(h.split(" ")[1:])
+                # name = " ".join(h.split(" ")[1:])
                 self.labels[h] = self._gtk.ButtonImage("heat-up", name)
             self.heaters.append(h)
 
