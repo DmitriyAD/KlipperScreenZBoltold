@@ -60,6 +60,11 @@ class Printer:
                     "temperature": 0,
                     "target": 0
                 }
+            if x == 'heat-up' or x == 'heat_up':
+                self.devices[x] = {
+                    "temperature" :0,
+                    "target " :0
+                }    
             if x.startswith('bed_mesh '):
                 r = self.config[x]
                 r['x_count'] = int(r['x_count'])
