@@ -47,13 +47,13 @@ class TemperaturePanel(ScreenPanel):
                 self.labels[h] = self._gtk.ButtonImage("heat-up", name)
             self.heaters.append(h)
 
-        # i = 0
-        # cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
-        # for h in self.heaters:
-        #     if not (h.startswith("temperature_sensor")):
-        #         self.labels[h].connect('clicked', self.select_heater, h)
-        #     eq_grid.attach(self.labels[h], i % cols, int(i/cols), 1, 1)
-        #     i += 1
+        i = 0
+        cols = 3 if len(self.heaters) > 4 else (1 if len(self.heaters) <= 2 else 2)
+        for h in self.heaters:
+            if not (h.startswith("temperature_sensor")):
+                self.labels[h].connect('clicked', self.select_heater, h)
+            eq_grid.attach(self.labels[h], i % cols, int(i/cols), 1, 1)
+            i += 1
 
         self.labels["control_grid"] = self._gtk.HomogeneousGrid()
 
