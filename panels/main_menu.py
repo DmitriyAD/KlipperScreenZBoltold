@@ -47,6 +47,7 @@ class MainPanel(MenuPanel):
                 "panel": "temperature"
             
                 })
+                self._temperature.show_numpad
             else:
                 name = " ".join(h.split(" ")[1:])
                 self.labels[h] = self._gtk.ButtonImage("heat-up", name)
