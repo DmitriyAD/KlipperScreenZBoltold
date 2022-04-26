@@ -137,6 +137,7 @@ class BasePanel(ScreenPanel):
         self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, 5, 5)
 
         if self._printer.has_heated_bed(): 
+            self.heaters = []
             add_heaters = self._printer.get_heaters()
             for h in add_heaters:
                 name = " ".join(h.split(" ")[1:])
