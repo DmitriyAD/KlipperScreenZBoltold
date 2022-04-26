@@ -191,10 +191,7 @@ class BasePanel(ScreenPanel):
         if self._printer.has_heated_bed():
             self.labels["heater_bed"].set_label(
                 "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
-            temp = self._screen.printer.get_dev_stat("heat_up", "temperature_sensore") 
-            name = " ".split(" ")[1:][0][:1].upper() 
-            if temp is not None:
-                    self.labels["heat_up"].set_label("%s%d°" % (name, round(temp)))       
+                 
 
         for x in self._printer.get_tools():
             self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))
