@@ -198,19 +198,17 @@ class BasePanel(ScreenPanel):
         if self._printer.has_heated_bed():
             self.labels["heater_bed"].set_label(
                 "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
-            # self.labels["heat_up"].set_label(
-            #     "%02d°" % round(self._printer.get_dev_stat("heat_up", "temperature_sensore")))          
+            for h in self._printer.get_heaters():
+                self.update_temp(
+                    h,
+                    self._printer.get_dev_stat(h, "temperature"),
+                    self._printer.get_dev_stat(h, "target"),
+                    None if h == "heater_bed" else " ".join(h.split(" ")[1:])
+                )
+            return  
+
         for x in self._printer.get_tools():
             self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))
-            
-        for h in self._printer.get_heaters():
-            self.update_temp(
-                h,
-                self._printer.get_dev_stat(h, "temperature"),
-                self._printer.get_dev_stat(h, "target"),
-                None if h == "heater_bed" else " ".join(h.split(" ")[1:])
-            )
-        return    
 
         if "toolhead" in data and "extruder" in data["toolhead"]:
             if data["toolhead"]["extruder"] != self.current_extruder:
@@ -218,6 +216,8 @@ class BasePanel(ScreenPanel):
                 self.current_extruder = data["toolhead"]["extruder"]
                 self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, 3, 3)
                 self.control['temp_box'].show_all()
+
+            
 
 
     def remove(self, widget):
