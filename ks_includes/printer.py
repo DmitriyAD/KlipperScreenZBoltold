@@ -276,6 +276,9 @@ class Printer:
     def has_heated_bed(self):
         if "heater_bed" in self.devices:
             return True
+    def has_heat_up(self):
+        if "temperature_sensor" in self.devices:
+            return True        
 
     def section_exists(self, section):
         if section in self.get_config_section_list():
