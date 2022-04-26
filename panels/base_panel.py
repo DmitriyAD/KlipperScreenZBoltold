@@ -137,13 +137,6 @@ class BasePanel(ScreenPanel):
         self.control['temp_box'].pack_start(self.labels["%s_box" % self.current_extruder], True, 5, 5)
 
         if self._printer.has_heated_bed(): 
-            self.heaters = []
-            add_heaters = self._printer.get_heaters()
-            for h in add_heaters:
-                name = " ".join(h.split(" ")[1:])
-                self.labels[h] = self._gtk.Image("heat-up.svg", name)
-                self.heaters.append(h)
-
             heat_up = self._gtk.Image("heat-up.svg", None, .4, .4)
             self.labels['heat_up'] = Gtk.Label(label="20 C")
             # self.labels['heater_bed'].get_style_context().add_class("printing-info")
@@ -197,15 +190,7 @@ class BasePanel(ScreenPanel):
 
         if self._printer.has_heated_bed():
             self.labels["heater_bed"].set_label(
-                "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature")))
-            for h in self._printer.get_heaters():
-                self.update_temp(
-                    h,
-                    self._printer.get_dev_stat(h, "temperature"),
-                    self._printer.get_dev_stat(h, "target"),
-                    None if h == "heater_bed" else " ".join(h.split(" ")[1:])
-                )
-            return  
+                "%02d°" % round(self._printer.get_dev_stat("heater_bed", "temperature"))) 
 
         for x in self._printer.get_tools():
             self.labels[x].set_label("%02d°" % round(self._printer.get_dev_stat(x, "temperature")))
