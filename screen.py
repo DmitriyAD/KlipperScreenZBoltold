@@ -115,15 +115,19 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
 
         Gtk.Window.__init__(self)
-        self.width = self._config.get_main_config().getint("width", Gdk.Screen.get_width(Gdk.Screen.get_default()))
-        self.height = self._config.get_main_config().getint("height", Gdk.Screen.get_height(Gdk.Screen.get_default()))
+        monitor = Gdk.Display.get_default().get_primary_monitor()
+        self.width = self._config.get_main_config().getint("width", monitor.get_geometry().width)
+        self.height = self._config.get_main_config().getint("height", monitor.get_geometry().height)
         self.set_default_size(self.width, self.height)
         self.set_resizable(False)
+        if self.width < self.height:
+            self.vertical_mode = True
+        else:
+            self.vertical_mode = False
         logging.info("Screen resolution: %sx%s" % (self.width, self.height))
-
         self.theme = self._config.get_main_config_option('theme')
-        self.gtk = KlippyGtk(self, self.width, self.height, self.theme,
-                             self._config.get_main_config().getboolean("show_cursor", fallback=False),
+        self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
+        self.gtk = KlippyGtk(self, self.width, self.height, self.theme, self.show_cursor,
                              self._config.get_main_config_option("font_size", "medium"))
         self.keyboard_height = self.gtk.get_keyboard_height()
         self.init_style()
@@ -139,16 +143,17 @@ class KlipperScreen(Gtk.Window):
 
         # Move mouse to 0,0
         os.system("/usr/bin/xdotool mousemove 0 0")
-        # Change cursor to blank
-        if self._config.get_main_config().getboolean("show_cursor", fallback=False):
-            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.ARROW))
-        else:
-            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.BLANK_CURSOR))
+        self.change_cursor()
+        self.initial_connection()
 
+    def initial_connection(self):
         printers = self._config.get_printers()
-        logging.debug("Printers: %s" % printers)
-        if len(printers) == 1:
-            pname = list(self._config.get_printers()[0])[0]
+        default_printer = self._config.get_main_config().get('default_printer')
+        logging.debug("Default printer: %s" % default_printer)
+        if [True for p in printers if default_printer in p]:
+            self.connect_printer(default_printer)
+        elif len(printers) == 1:
+            pname = list(printers[0])[0]
             self.connect_printer(pname)
         else:
             self.show_panel("printer_select", "printer_select", "Printer Select", 2)
@@ -611,12 +616,14 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
         logging.debug("### Going to disconnected")
         self.base_panel.show_macro_shortcut(False)
+        self.wake_screen()
         self.printer_initializing(_("Klipper has disconnected"))
-
-        for panel in list(self.panels):
-            if panel in ["printer_select", "splash_screen"]:
-                continue
-            # del self.panels[panel]
+        if self.connected_printer is not None:
+            self.connected_printer = None
+            # Try to reconnect
+            self.connect_printer(self.connecting_to_printer)
+        else:
+            self.initial_connection()
 
     def state_error(self, prev_state):
         if "printer_select" in self._cur_panels:

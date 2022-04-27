@@ -272,6 +272,32 @@ class Printer:
     def get_extruder_count(self):
         return self.extrudercount
 
+    def get_temp_store_devices(self):
+        if self.tempstore is not None:
+            return list(self.tempstore)
+    def get_temp_store_device_has_target(self, device):
+        if device in self.tempstore:
+            if "targets" in self.tempstore[device]:
+                return True
+        return False
+
+    def get_temp_store(self, device, section=False, results=0):
+        if device not in self.tempstore:
+            return False
+
+        if section is not False:
+            if section not in self.tempstore[device]:
+                return False
+            if results == 0 or results >= len(self.tempstore[device][section]):
+                return self.tempstore[device][section]
+            return self.tempstore[device][section][-results:]
+
+        temp = {}
+        for section in self.tempstore[device]:
+            if results == 0 or results >= len(self.tempstore[device][section]):
+                temp[section] = self.tempstore[device][section]
+            temp[section] = self.tempstore[device][section][-results:]
+        return temp        
     def get_tools(self):
         return self.tools
 
@@ -297,3 +323,13 @@ class Printer:
             return
 
         self.devices[dev][stat] = value
+    def _update_temp_store(self):
+        for device in self.tempstore:
+            for x in self.tempstore[device]:
+                if len(self.tempstore[device][x]) >= 1200:
+                    self.tempstore[device][x].pop(0)
+                temp = self.get_dev_stat(device, x[:-1])
+                if temp is None:
+                    temp = 0
+                self.tempstore[device][x].append(round(temp, 2))
+        return True    
