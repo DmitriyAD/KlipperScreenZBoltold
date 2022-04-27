@@ -765,7 +765,7 @@ class KlipperScreen(Gtk.Window):
 
         dialog = self.gtk.Dialog(self, buttons, label, self._confirm_send_action_response, method, params)
 
-    def _confirm_send_action(self, widget, text, method, params={}):
+    def _confirm_send_actions(self, widget, text, method, params={}):
         _ = self.lang.gettext
 
         buttons = [
