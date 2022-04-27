@@ -115,15 +115,10 @@ class KlipperScreen(Gtk.Window):
         _ = self.lang.gettext
 
         Gtk.Window.__init__(self)
-        monitor = Gdk.Display.get_default().get_primary_monitor()
         self.width = self._config.get_main_config().getint("width", Gdk.Screen.get_width(Gdk.Screen.get_default()))
         self.height = self._config.get_main_config().getint("height", Gdk.Screen.get_height(Gdk.Screen.get_default()))
         self.set_default_size(self.width, self.height)
         self.set_resizable(False)
-        if self.width < self.height:
-            self.vertical_mode = True
-        else:
-            self.vertical_mode = False
         logging.info("Screen resolution: %sx%s" % (self.width, self.height))
 
         self.theme = self._config.get_main_config_option('theme')

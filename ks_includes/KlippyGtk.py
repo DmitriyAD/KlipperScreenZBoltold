@@ -38,9 +38,6 @@ class KlippyGtk:
 
         logging.debug("img width: %s height: %s" % (self.img_width, self.img_height))
 
-    def get_action_bar_height(self):
-        return self.action_bar_height
-
     def get_action_bar_width(self):
         return self.action_bar_width
 
